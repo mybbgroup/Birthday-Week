@@ -93,8 +93,8 @@ function birthday_week_populate()
                         if ($groupscache[$bdayuser['displaygroup']] && $groupscache[$bdayuser['displaygroup']]['showinbirthdaylist'] != 1) {
                             continue;
                         }
-                        $daym = explode("-", $bdayuser['birthday']);
-                        $age = ' ('.date("D", mktime(0,0,0,$daym[1],$daym[0],my_date('Y', TIME_NOW, '', 0))).')'; // We can show birthday here
+                        // Manipulate to show day of the week in place of age here
+                        $age = ' ('.date("D", strtotime('midnight', strtotime(sprintf("this week +%u days", array_search($bdayuser['bday'], $birthweek))))).')';
 
                         $bdayuser['username'] = format_name(htmlspecialchars_uni($bdayuser['username']), $bdayuser['usergroup'], $bdayuser['displaygroup']);
                         $bdayuser['profilelink'] = build_profile_link($bdayuser['username'], $bdayuser['uid']);
