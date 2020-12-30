@@ -50,7 +50,7 @@ function birthday_week_populate()
             global $templates;
             $birthweek = array();
             for ($i = 0; $i < 7; $i++) {
-                $birthweek[] = date('d-m', strtotime(sprintf("this week +%u days", $i)));
+                $birthweek[] = date('j-n', strtotime(sprintf("this week +%u days", $i)));
             }
             $birthday_week_data = array_intersect_key($birthdays, array_flip($birthweek));
             $birthday_week_data = array_merge_recursive(...array_values($birthday_week_data));
@@ -140,7 +140,7 @@ function birthday_week_cache()
     $birthdays = $birthweek = array();
 
     for ($i = -1; $i < 8; $i++) { // Consider extra days on both side for timezone difference 
-        $birthweek[] = date('d-m', strtotime(sprintf("this week +%u days", $i)));
+        $birthweek[] = date('j-n', strtotime(sprintf("this week +%u days", $i)));
     }
     array_walk($birthweek, function (&$value, $key) {
         $value = "'" . $value . "-%'";
